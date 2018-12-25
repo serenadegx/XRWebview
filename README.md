@@ -12,7 +12,7 @@
 
 6.优化webview的一些坑
 
-![image](https://github.com/serenadegx/EasyLocation/blob/master/1540976253253.gif)
+![image](https://github.com/serenadegx/XRWebview/blob/master/1545730427868.gif)
 
 
 感谢同事文静，谦谦，也感谢以下博客：
