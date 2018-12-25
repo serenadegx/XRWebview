@@ -20,7 +20,9 @@
 
 普通网页加载：
 
-XRWebView.with(webView).simple().serZoomEnable(true)
+    XRWebView.with(webView)
+                .simple()
+                .serZoomEnable(true)
                 .setImageLoadEnable(true)
                 .setSslEnable(true)
                 .build().loadUrl(url, new BaseWebViewListener() {
@@ -47,7 +49,7 @@ XRWebView.with(webView).simple().serZoomEnable(true)
         
 下载：
 
-XRWebView.with(webView).multi()
+    XRWebView.with(webView).multi()
                 .addDownLoadListener(new DownloadListener() {
                     @Override
                     public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
@@ -79,7 +81,7 @@ XRWebView.with(webView).multi()
                 
  jsCallAndroid：
  
- XRWebView.with(webView).multi()
+    XRWebView.with(webView).multi()
                 .jsCallAndroid(new AndroidCallJS(this), "test1")
                 .build()
                 .loadUrlInAsset("javascript1.html", new BaseWebViewListener() {
@@ -106,7 +108,7 @@ XRWebView.with(webView).multi()
  
  androidCallJs：
  
- XRWebView.with(webView).multi()
+    XRWebView.with(webView).multi()
                 .build()
                 .loadUrlInAsset("javascript.html", new BaseWebViewListener() {
                     @Override
@@ -132,7 +134,7 @@ XRWebView.with(webView).multi()
  
  上传文件：
  
- XRWebView.with(webView).multi()
+    XRWebView.with(webView).multi()
                 .openFile(new FileChooserWebViewListener() {
                     @Override
                     public void onFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback,
