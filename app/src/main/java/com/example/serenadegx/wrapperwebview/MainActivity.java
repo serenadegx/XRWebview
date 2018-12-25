@@ -10,6 +10,7 @@ public class MainActivity extends WrapperPermissionActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button bt0 = findViewById(R.id.bt0);
         Button bt1 = findViewById(R.id.bt1);
         Button bt2 = findViewById(R.id.bt2);
