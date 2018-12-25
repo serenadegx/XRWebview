@@ -18,6 +18,21 @@
 
 # 使用
 
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+    
+    
+
+	dependencies {
+	        implementation 'com.github.serenadegx:XRWebview:1.0.0'
+	}
+
+
+
 普通网页加载：
 
     XRWebView.with(webView)
