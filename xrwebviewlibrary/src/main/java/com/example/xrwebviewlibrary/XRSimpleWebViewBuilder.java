@@ -7,6 +7,7 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class XRSimpleWebViewBuilder {
@@ -53,6 +54,22 @@ public class XRSimpleWebViewBuilder {
         return this;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public XRSimpleWebViewBuilder syncCookie(Context context, String domain, String cookie) {
+        return syncCookie(context, domain, getCookieMap(cookie));
+    }
+
+    private Map<String, String> getCookieMap(String cookie) {
+        Map<String, String> data = new HashMap<>();
+        String[] split = cookie.split(";");
+        for (String str : split) {
+            String[] _split = str.split("=");
+            if (_split.length == 2)
+                data.put(_split[0], _split[1]);
+        }
+        return data;
+    }
+
     public XRSimpleWebViewBuilder serZoomEnable(boolean isZoom) {
         this.isZoom = isZoom;
         return this;
@@ -82,4 +99,5 @@ public class XRSimpleWebViewBuilder {
 //        cookieManager.setCookie(".baidu.com", "Domain=.baidu.com");
 //        cookieManager.setCookie(".baidu.com", "Path=/");
     }
+
 }
