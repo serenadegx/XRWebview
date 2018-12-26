@@ -72,7 +72,7 @@
     		.addDownLoadListener(new DownloadListener())//下载
                 .jsCallAndroid(new AndroidCallJS(this), "test1")//jsCallAndroid
 		.openFile(new FileChooserWebViewListener())//上传文件（图片、视频、音频、其他）
-		.syncCookie(this, url, cookies)
+		.syncCookie(this, url, cookies)//同步cookie
                 .build()
                 .loadUrlInAsset("javascript1.html", new BaseWebViewListener() {
                     @Override
