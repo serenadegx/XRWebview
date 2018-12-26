@@ -17,7 +17,6 @@
 8.优化webview的一些坑
 
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1545730427868.gif)
-
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1545796778324.gif)
 
 # 使用
