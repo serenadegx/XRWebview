@@ -31,7 +31,7 @@
     
 
 	dependencies {
-	        implementation 'com.github.serenadegx:XRWebview:1.0.0'
+	        implementation 'com.github.serenadegx:XRWebview:1.0.2'
 	}
 
 
