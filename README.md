@@ -10,11 +10,15 @@
 
 5.上传文件（图片、视频、音频等）
 
-6.获取标题、加载进度、加载错误的回调
+6.同步cookie
 
-7.优化webview的一些坑
+7.获取标题、加载进度、加载错误的回调
+
+8.优化webview的一些坑
 
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1545730427868.gif)
+
+![image](https://github.com/serenadegx/XRWebview/blob/master/1545796778324.gif)
 
 # 使用
 
@@ -62,42 +66,14 @@
             }
         });
         
-下载：
-
-    XRWebView.with(webView).multi()
-                .addDownLoadListener(new DownloadListener() {
-                    @Override
-                    public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
-                        Toast.makeText(WebViewActivity.this, "下载路径：" + url, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .build()
-                .loadUrl(downloadUrl, new BaseWebViewListener() {
-                    @Override
-                    public void onLoadError(int errorCode, String description) {
-
-                    }
-
-                    @Override
-                    public void onGetTitle(String title) {
-                        setTitle(title);
-                    }
-
-                    @Override
-                    public void onProgress(int progress) {
-                        if (progress == 100) {
-                            pb.setVisibility(View.GONE);
-                        } else {
-                            pb.setVisibility(View.VISIBLE);
-                            pb.setProgress(progress);
-                        }
-                    }
-                });
                 
- jsCallAndroid：
+ 各功能使用：
  
     XRWebView.with(webView).multi()
-                .jsCallAndroid(new AndroidCallJS(this), "test1")
+    		.addDownLoadListener(new DownloadListener())//下载
+                .jsCallAndroid(new AndroidCallJS(this), "test1")//jsCallAndroid
+		.openFile(new FileChooserWebViewListener())//上传文件（图片、视频、音频、其他）
+		.syncCookie(this, url, cookies)
                 .build()
                 .loadUrlInAsset("javascript1.html", new BaseWebViewListener() {
                     @Override
@@ -120,68 +96,33 @@
                         }
                     }
                 });
- 
- androidCallJs：
- 
-    XRWebView.with(webView).multi()
-                .build()
-                .loadUrlInAsset("javascript.html", new BaseWebViewListener() {
+ 	//androidCallJs
+ 	XRWebView.androidCallJs("callJS", new ValueCallback<String>() {
                     @Override
-                    public void onLoadError(int errorCode, String description) {
-
-                    }
-
-                    @Override
-                    public void onGetTitle(String title) {
-                        setTitle(title);
-                    }
-
-                    @Override
-                    public void onProgress(int progress) {
-                        if (progress == 100) {
-                            pb.setVisibility(View.GONE);
-                        } else {
-                            pb.setVisibility(View.VISIBLE);
-                            pb.setProgress(progress);
-                        }
+                    public void onReceiveValue(String value) {
+                        Snackbar.make(v, value, Snackbar.LENGTH_SHORT)
+                                .setAction("关闭", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                    }
+                                })
+                                .show();
                     }
                 });
- 
- 上传文件：
- 
-    XRWebView.with(webView).multi()
-                .openFile(new FileChooserWebViewListener() {
-                    @Override
-                    public void onFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback,
-                                              WebChromeClient.FileChooserParams fileChooserParams, int fileType) {
-                        if (fileType == XRWebView.IMAGE)
-                            //权限适配
-                            openCamera();
-                    }
-                })
-                .build()
-                .loadUrlInAsset("javascript_openFile.html", new BaseWebViewListener() {
-                    @Override
-                    public void onLoadError(int errorCode, String description) {
+            }
+	    
 
-                    }
-
-                    @Override
-                    public void onGetTitle(String title) {
-                        setTitle(title);
-                    }
-
-                    @Override
-                    public void onProgress(int progress) {
-                        if (progress == 100) {
-                            pb.setVisibility(View.GONE);
-                        } else {
-                            pb.setVisibility(View.VISIBLE);
-                            pb.setProgress(progress);
-                        }
-                    }
-                });
+ 回退及回收：
  
+ 	//回收
+ 	XRWebView.releaseWebView();
+	//回退
+	XRWebView.goBack(new GoBackListener() {
+            @Override
+            public void onWebFinish() {
+                finish();
+            }
+        });
  
 
 感谢同事文静，谦谦答疑，也感谢以下博客：
