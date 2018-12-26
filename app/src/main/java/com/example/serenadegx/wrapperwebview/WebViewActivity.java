@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -21,6 +22,9 @@ import com.example.xrwebviewlibrary.BaseWebViewListener;
 import com.example.xrwebviewlibrary.FileChooserWebViewListener;
 import com.example.xrwebviewlibrary.GoBackListener;
 import com.example.xrwebviewlibrary.XRWebView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class WebViewActivity extends WrapperPermissionActivity {
     public String url = "https://www.baidu.com/";
@@ -53,6 +57,9 @@ public class WebViewActivity extends WrapperPermissionActivity {
                 requestPermissions(this, new String[]{Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, 715);
                 break;
+            case 5:
+                synCookie();
+                break;
             default:
                 break;
         }
@@ -77,6 +84,7 @@ public class WebViewActivity extends WrapperPermissionActivity {
     }
 
     private void normal() {
+        CookieManager.getInstance().removeSessionCookies(null);
         XRWebView.with(webView).simple().serZoomEnable(true)
                 .setImageLoadEnable(true)
                 .setSslEnable(true)
@@ -201,6 +209,40 @@ public class WebViewActivity extends WrapperPermissionActivity {
                 })
                 .build()
                 .loadUrlInAsset("javascript_openFile.html", new BaseWebViewListener() {
+                    @Override
+                    public void onLoadError(int errorCode, String description) {
+
+                    }
+
+                    @Override
+                    public void onGetTitle(String title) {
+                        setTitle(title);
+                    }
+
+                    @Override
+                    public void onProgress(int progress) {
+                        if (progress == 100) {
+                            pb.setVisibility(View.GONE);
+                        } else {
+                            pb.setVisibility(View.VISIBLE);
+                            pb.setProgress(progress);
+                        }
+                    }
+                });
+    }
+
+    private void synCookie() {
+        Map<String, String> cookies = new HashMap<>();
+        cookies.put("BAIDUID", "675841E9379DB2ACDFA82E9A7A0ED6F9:FG=1");
+        cookies.put("BD_CK_SAM", "1");
+        cookies.put("BD_HOME", "1");
+        cookies.put("BD_UPN", "133252");
+        cookies.put("BDUSS", "pyUjBIdEthREl3SGY4bGEyaE5XemFiczNCYn5pRUk4U0diaUhGLXRSSENmMHBjQVFBQUFBJCQAAAAAAAAAAAEAAACPJpLX0KGworfJeHIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMLyIlzC8iJcb0");
+        cookies.put("H_PS_PSSID", "26524_1449_27216_21117_28205_28132_27750_28139_27509");
+        XRWebView.with(webView).simple()
+                .syncCookie(this, ".baidu.com", cookies)
+                .build()
+                .loadUrl("https://www.baidu.com/", new BaseWebViewListener() {
                     @Override
                     public void onLoadError(int errorCode, String description) {
 
