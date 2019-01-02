@@ -88,6 +88,7 @@ public class WebViewActivity extends WrapperPermissionActivity {
     private void normal() {
         CookieManager.getInstance().removeSessionCookies(null);
         XRWebView.with(webView).simple().serZoomEnable(true)
+                .addHeaders(new HashMap<String, String>())
                 .setImageLoadEnable(true)
                 .setSslEnable(true)
                 .build().loadUrl(url, new BaseWebViewListener() {
