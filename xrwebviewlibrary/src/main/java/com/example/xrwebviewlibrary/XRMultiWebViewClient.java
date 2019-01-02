@@ -1,6 +1,7 @@
 package com.example.xrwebviewlibrary;
 
 import android.net.http.SslError;
+import android.text.TextUtils;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,8 +22,14 @@ public class XRMultiWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-        webView.loadUrl(url);
-        return true;
+        //解决网页重定向问题
+        WebView.HitTestResult hitTestResult = webView.getHitTestResult();
+        //hitTestResult==null
+        if (!TextUtils.isEmpty(url) && hitTestResult == null) {
+            webView.loadUrl(url);
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -39,6 +39,8 @@ public class WebViewActivity extends WrapperPermissionActivity {
         setContentView(R.layout.activity_webview);
         pb = findViewById(R.id.pb);
         webView = findViewById(R.id.webView);
+
+
         bt = findViewById(R.id.bt);
         switch (getIntent().getIntExtra("type", 0)) {
             case 0:

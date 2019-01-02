@@ -1,5 +1,6 @@
 package com.example.xrwebviewlibrary;
 
+import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
@@ -15,6 +16,7 @@ public class XRSimpleWebChromeClient extends WebChromeClient {
 
     @Override
     public void onReceivedTitle(WebView view, String title) {
+        Log.i("Mango", "title:" + title);
         if (webViewListener != null)
             webViewListener.onGetTitle(title);
     }

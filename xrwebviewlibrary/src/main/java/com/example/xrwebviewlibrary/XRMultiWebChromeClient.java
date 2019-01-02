@@ -34,6 +34,25 @@ public class XRMultiWebChromeClient extends WebChromeClient {
             webViewListener.onProgress(newProgress);
     }
 
+//    //  android 3.0以下：用的这个方法
+//    public void openFileChooser(ValueCallback<Uri> valueCallback) {
+//        uploadMessage = valueCallback;
+//        openImageChooserActivity();
+//    }
+//
+//    // android 3.0以上，android4.0以下：用的这个方法
+//    public void openFileChooser(ValueCallback valueCallback, String acceptType) {
+//        uploadMessage = valueCallback;
+//        openImageChooserActivity();
+//    }
+//
+//    //android 4.0 - android 4.3  安卓4.4.4也用的这个方法
+//    public void openFileChooser(ValueCallback<Uri> valueCallback, String acceptType,
+//                                String capture) {
+//        uploadMessage = valueCallback;
+//        openImageChooserActivity();
+//    }
+
     // Android 5.0及以上用的这个方法
     @Override
     public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]>

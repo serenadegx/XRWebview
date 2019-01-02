@@ -1,7 +1,13 @@
 package com.example.xrwebviewlibrary;
 
+import android.graphics.Bitmap;
 import android.net.http.SslError;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -20,11 +26,33 @@ public class XRSimpleWebViewClient extends WebViewClient {
         this.webViewListener = webViewListener;
     }
 
+    //
+//    @Override
+//    public boolean shouldOverrideUrlLoading(WebView webView, String url) {
+//        webView.loadUrl(url);
+//        return true;
+//    }
     @Override
     public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-        webView.loadUrl(url);
-        return true;
+        //解决网页重定向问题
+        WebView.HitTestResult hitTestResult = webView.getHitTestResult();
+        //hitTestResult==null
+        if (!TextUtils.isEmpty(url) && hitTestResult == null) {
+            webView.loadUrl(url);
+            return true;
+        }
+        return false;
     }
+
+//    @RequiresApi(api = Build.VERSION_CODES.N)
+//    @Override
+//    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//        if (request.isRedirect()) {
+//            view.loadUrl(request.getUrl().toString());
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
@@ -41,6 +69,12 @@ public class XRSimpleWebViewClient extends WebViewClient {
             handler.cancel();      //表示挂起连接，为默认方式
         }
         // handler.handleMessage(null);    //可做其他处理
+    }
+
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        Log.i("Mango", "url:" + url);
+        super.onPageStarted(view, url, favicon);
     }
 
     @Override
