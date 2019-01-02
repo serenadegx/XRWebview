@@ -19,7 +19,7 @@
 9.解决网页重定向导致回退问题
 
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1545730427868.gif)
-![image](https://github.com/serenadegx/XRWebview/blob/master/1545796778324.gif)
+![image](https://github.com/serenadegx/XRWebview/blob/master/1546404544823.gif)
 
 # 使用
 
