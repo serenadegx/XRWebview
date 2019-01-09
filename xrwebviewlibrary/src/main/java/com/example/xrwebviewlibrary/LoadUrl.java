@@ -64,11 +64,7 @@ public class LoadUrl {
 
         webSettings.setJavaScriptEnabled(true);//启用JS
 
-        if (openFileListener != null) {
-            webSettings.setDomStorageEnabled(true);
-//            webSettings.setAllowFileAccess(true); //设置可以访问文件
-//            webSettings.setAllowContentAccess(true); // 是否可访问Content Provider的资源，默认值 true
-        }
+        webSettings.setDomStorageEnabled(true);//解决H5启用LocalStorage问题
     }
 
     private void initWebChromeClient(BaseWebViewListener webViewListener) {

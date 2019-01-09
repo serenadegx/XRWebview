@@ -27,7 +27,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WebViewActivity extends WrapperPermissionActivity {
-    public String url = "https://www.baidu.com/";
+    public String url = "https://openapi.bestsign.info/fe/intf/v2/#/previewSign?developerId=20845580" +
+            "14785782310&rtick=15469271761220&signType=token&sign=eyJkZXZlbG9wZXJJZCI6IjIwODQ1NTgwMT" +
+            "Q3ODU3ODIzMTAiLCJjYXRhbG9nSWQiOiIzMTIwNjk1NDY1MDkwNTg5MTQ1IiwiY29udHJhY3RJZCI6IiIsImV4c" +
+            "GlyZUF0IjoiMTU0NzUzMTk3NiIsImFjY291bnQiOiJhY2E5OTQyOS1jYTczLTQ0ZmYtODY2Mi0zNDU3MDk5YzQ2" +
+            "YzAifS4xNTQ2OTI3MTc2MTIyMjAyNA__.4e8bd36cdae9d3633b6216e4d2e488f6&catalogId=31206954650" +
+            "90589145&signerAccount=aca99429-ca73-44ff-8662-3457099c46c0&dpi=240&sid=";
     public String downloadUrl = "https://lite-uat.fullertontechnik.com/repayment/10083?authToken=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdWxsZXJ0b250ZWNobmlrIiwiYXVkIjoiQ0hBTkdBTiIsImlzcyI6ImxvYW5hcHAiLCJpYXQiOjE1NDU3MDM0OTAsImV4cCI6MTU0NTc4OTg5MH0.zpvu5EtGD8hDzL7hbo7-iBwXMCleNLxnpq-h4pM8O70&channelCode=CHANGAN&channelAppId=20181219020101002265&changeBankCardUrl=%E5%86%97%E4%BD%99%E5%8F%82%E6%95%B0";
     private ProgressBar pb;
     private WebView webView;
