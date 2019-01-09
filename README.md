@@ -18,6 +18,8 @@
 
 9.解决网页重定向导致回退问题
 
+10.解决网页加载白板（H5启用本地缓存问题）
+
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1545730427868.gif)
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1546404544823.gif)
 
@@ -35,7 +37,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 
 	dependencies {
-	        implementation 'com.github.serenadegx:XRWebview:1.0.6'
+	        implementation 'com.github.serenadegx:XRWebview:1.0.7'
 	}
 
 
