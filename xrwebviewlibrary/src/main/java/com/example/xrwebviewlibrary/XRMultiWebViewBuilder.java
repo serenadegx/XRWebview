@@ -17,6 +17,8 @@ public class XRMultiWebViewBuilder {
     boolean isZoom;
     boolean isAllowAllSsl;
     boolean isImageLoad;
+    String jsFunction;
+    String[] functionName;
     FileChooserWebViewListener openFileListener;
 
     public XRMultiWebViewBuilder(WebView mWebView) {
@@ -82,6 +84,12 @@ public class XRMultiWebViewBuilder {
                 methods) {
             mWebView.addJavascriptInterface(obj, name);
         }
+        return this;
+    }
+
+    public XRMultiWebViewBuilder jsInject(String jsFunction, String... functionName) {
+        this.jsFunction = jsFunction;
+        this.functionName = functionName;
         return this;
     }
 

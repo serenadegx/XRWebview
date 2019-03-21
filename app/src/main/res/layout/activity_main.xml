@@ -49,4 +49,11 @@
         android:layout_margin="10dp"
         android:text="setCookie" />
 
+    <Button
+        android:id="@+id/bt6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="jsInject" />
+
 </LinearLayout>

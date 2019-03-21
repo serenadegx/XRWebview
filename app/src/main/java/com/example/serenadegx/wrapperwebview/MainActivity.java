@@ -17,6 +17,7 @@ public class MainActivity extends WrapperPermissionActivity implements View.OnCl
         Button bt3 = findViewById(R.id.bt3);
         Button bt4 = findViewById(R.id.bt4);
         Button bt5 = findViewById(R.id.bt5);
+        Button bt6 = findViewById(R.id.bt6);
 
         bt0.setOnClickListener(this);
         bt1.setOnClickListener(this);
@@ -24,6 +25,7 @@ public class MainActivity extends WrapperPermissionActivity implements View.OnCl
         bt3.setOnClickListener(this);
         bt4.setOnClickListener(this);
         bt5.setOnClickListener(this);
+        bt6.setOnClickListener(this);
     }
 
 
@@ -47,6 +49,9 @@ public class MainActivity extends WrapperPermissionActivity implements View.OnCl
                 break;
             case R.id.bt5:
                 WebViewActivity.start2WebViewActivity(this, 5);
+                break;
+            case R.id.bt6:
+                WebViewActivity.start2WebViewActivity(this, 6);
                 break;
             default:
                 break;

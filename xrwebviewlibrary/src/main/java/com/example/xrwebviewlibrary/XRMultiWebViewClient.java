@@ -7,6 +7,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class XRMultiWebViewClient extends WebViewClient {
+    private String[] functionName;
+    private String jsFunction;
     private boolean mAllowAllSsl;
     private boolean isImageLoad;
     private BaseWebViewListener webViewListener;
@@ -17,6 +19,14 @@ public class XRMultiWebViewClient extends WebViewClient {
     public XRMultiWebViewClient(boolean mAllowAllSsl, boolean isImageLoad, BaseWebViewListener webViewListener) {
         this.mAllowAllSsl = mAllowAllSsl;
         this.isImageLoad = isImageLoad;
+        this.webViewListener = webViewListener;
+    }
+
+    public XRMultiWebViewClient(boolean isAllowAllSsl, boolean isImageLoad, String jsFunction, String[] functionName, BaseWebViewListener webViewListener) {
+        this.mAllowAllSsl = isAllowAllSsl;
+        this.isImageLoad = isImageLoad;
+        this.jsFunction = jsFunction;
+        this.functionName = functionName;
         this.webViewListener = webViewListener;
     }
 
@@ -51,6 +61,13 @@ public class XRMultiWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(WebView webView, String url) {
+        //js注入
+        if (!TextUtils.isEmpty(jsFunction) && (functionName != null && functionName.length > 0)) {
+            webView.loadUrl("javascript:" + jsFunction);
+            for (String name : functionName) {
+                webView.loadUrl("javascript:" + name);
+            }
+        }
         //页面加载完成后加载图片
         if (!webView.getSettings().getLoadsImagesAutomatically() && isImageLoad) {
             webView.getSettings().setLoadsImagesAutomatically(true);

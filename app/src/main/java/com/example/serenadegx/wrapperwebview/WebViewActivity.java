@@ -67,6 +67,9 @@ public class WebViewActivity extends WrapperPermissionActivity {
             case 5:
                 synCookie();
                 break;
+            case 6:
+                jsInject();
+                break;
             default:
                 break;
         }
@@ -86,6 +89,34 @@ public class WebViewActivity extends WrapperPermissionActivity {
                                 .show();
                     }
                 });
+            }
+        });
+    }
+
+    private void jsInject() {
+        XRWebView.with(webView).multi()
+                .jsInject("function show(){alert(\"hello world\");}" +
+                                "function changeButton(){document.getElementById(\"index-bn\").innerHTML = \"哈哈\";}",
+                        "changeButton();","show()")
+                .build().loadUrl("https://m.baidu.com/", new BaseWebViewListener() {
+            @Override
+            public void onLoadError(int errorCode, String description) {
+
+            }
+
+            @Override
+            public void onGetTitle(String title) {
+
+            }
+
+            @Override
+            public void onProgress(int progress) {
+                if (progress == 100) {
+                    pb.setVisibility(View.GONE);
+                } else {
+                    pb.setVisibility(View.VISIBLE);
+                    pb.setProgress(progress);
+                }
             }
         });
     }

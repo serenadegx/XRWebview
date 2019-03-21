@@ -2,6 +2,7 @@ package com.example.xrwebviewlibrary;
 
 import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
 import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -9,6 +10,8 @@ import android.webkit.WebView;
 import java.util.Map;
 
 public class LoadUrl {
+    private String[] functionName;
+    private String jsFunction;
     private WebView mWebView;
     private Map<String, String> mHttpHeaders;
     private boolean isZoom;
@@ -36,6 +39,8 @@ public class LoadUrl {
         this.isAllowAllSsl = builder.isAllowAllSsl;
         this.isImageLoad = builder.isImageLoad;
         this.openFileListener = builder.openFileListener;
+        this.jsFunction = builder.jsFunction;
+        this.functionName = builder.functionName;
         initSettings();
     }
 
@@ -79,7 +84,12 @@ public class LoadUrl {
         if (!isMulti) {
             mWebView.setWebViewClient(new XRSimpleWebViewClient(isAllowAllSsl, isImageLoad, webViewListener));
         } else {
-            mWebView.setWebViewClient(new XRMultiWebViewClient(isAllowAllSsl, isImageLoad, webViewListener));
+            if (!TextUtils.isEmpty(jsFunction) && (functionName != null && functionName.length > 0)) {
+                mWebView.setWebViewClient(new XRMultiWebViewClient(isAllowAllSsl, isImageLoad, jsFunction,functionName,webViewListener));
+            } else {
+                mWebView.setWebViewClient(new XRMultiWebViewClient(isAllowAllSsl, isImageLoad, webViewListener));
+            }
+
         }
     }
 
