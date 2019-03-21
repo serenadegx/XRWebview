@@ -20,6 +20,8 @@
 
 10.解决网页加载白板（H5启用本地缓存问题）
 
+11.js函数注入
+
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1545730427868.gif)
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1546404544823.gif)
 
@@ -115,7 +117,32 @@ Add the dependency
                     }
                 });
             }
-	    
+	    //js函数注入
+	    XRWebView.with(webView).multi()
+                .jsInject("function show(){alert(\"hello world\");}" +
+                                "function changeButton(){document.getElementById(\"index-bn\").innerHTML = \"哈哈\";}",
+                        "changeButton();","show()")
+                .build().loadUrl("https://m.baidu.com/", new BaseWebViewListener() {
+            @Override
+            public void onLoadError(int errorCode, String description) {
+
+            }
+
+            @Override
+            public void onGetTitle(String title) {
+
+            }
+
+            @Override
+            public void onProgress(int progress) {
+                if (progress == 100) {
+                    pb.setVisibility(View.GONE);
+                } else {
+                    pb.setVisibility(View.VISIBLE);
+                    pb.setProgress(progress);
+                }
+            }
+        });
 
  回退及回收：
  
