@@ -22,6 +22,8 @@
 
 11.js函数注入
 
+12.加载html字符串
+
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1545730427868.gif)
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1546404544823.gif)
 ![image](https://github.com/serenadegx/XRWebview/blob/master/1553138404982.gif)
@@ -40,7 +42,10 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 
 	dependencies {
-	        implementation 'com.github.serenadegx:XRWebview:1.0.8'
+	        implementation 'com.github.serenadegx:XRWebview:1.0.9'
+	}
+
+
 	}
 
 
