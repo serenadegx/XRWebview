@@ -3,6 +3,7 @@ package com.example.xrwebviewlibrary;
 import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Xml;
 import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -85,7 +86,7 @@ public class LoadUrl {
             mWebView.setWebViewClient(new XRSimpleWebViewClient(isAllowAllSsl, isImageLoad, webViewListener));
         } else {
             if (!TextUtils.isEmpty(jsFunction) && (functionName != null && functionName.length > 0)) {
-                mWebView.setWebViewClient(new XRMultiWebViewClient(isAllowAllSsl, isImageLoad, jsFunction,functionName,webViewListener));
+                mWebView.setWebViewClient(new XRMultiWebViewClient(isAllowAllSsl, isImageLoad, jsFunction, functionName, webViewListener));
             } else {
                 mWebView.setWebViewClient(new XRMultiWebViewClient(isAllowAllSsl, isImageLoad, webViewListener));
             }
@@ -136,5 +137,8 @@ public class LoadUrl {
         }
     }
 
+    public void loadHtml(String content, String mimeTyp, String encoding) {
+        mWebView.loadDataWithBaseURL(null, content, mimeTyp, encoding, null);
+    }
 
 }
