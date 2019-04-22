@@ -42,7 +42,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 
 	dependencies {
-	        implementation 'com.github.serenadegx:XRWebview:1.0.9'
+	        implementation 'com.github.serenadegx:XRWebview:1.1.0'
 	}
 
 
