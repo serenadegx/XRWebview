@@ -26,6 +26,7 @@ public class MainActivity extends WrapperPermissionActivity implements View.OnCl
         bt4.setOnClickListener(this);
         bt5.setOnClickListener(this);
         bt6.setOnClickListener(this);
+
     }
 
 
