@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
@@ -22,6 +23,7 @@ import com.example.xrwebviewlibrary.BaseWebViewListener;
 import com.example.xrwebviewlibrary.FileChooserWebViewListener;
 import com.example.xrwebviewlibrary.GoBackListener;
 import com.example.xrwebviewlibrary.XRWebView;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,18 +74,42 @@ public class WebViewActivity extends WrapperPermissionActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                XRWebView.androidCallJs("callJS", new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String value) {
-                        Snackbar.make(v, value, Snackbar.LENGTH_SHORT)
-                                .setAction("关闭", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                    }
-                                })
-                                .show();
-                    }
-                });
+//                XRWebView.androidCallJs("callJS", new ValueCallback<String>() {
+//                    @Override
+//                    public void onReceiveValue(String value) {
+//                        Snackbar.make(v, value, Snackbar.LENGTH_SHORT)
+//                                .setAction("关闭", new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                    }
+//                                })
+//                                .show();
+//                    }
+//                });
+//                Map<String, String> params = new HashMap<>();
+//                params.put("code", "0");
+//                params.put("msg", "正常");
+//                String json = new Gson().toJson(params);
+//                Log.i("mango", "json:" + json);
+//                XRWebView.androidCallJs("callJS1", json, new ValueCallback<String>() {
+//                    @Override
+//                    public void onReceiveValue(String value) {
+//                        Snackbar.make(v, value, Snackbar.LENGTH_SHORT)
+//                                .setAction("关闭", new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                    }
+//                                })
+//                                .show();
+//                    }
+//                });
+
+                Map<String, String> params = new HashMap<>();
+                params.put("code", "0");
+                params.put("msg", "正常");
+                String json = new Gson().toJson(params);
+                Log.i("mango", "json:" + json);
+                XRWebView.androidCallJs("callJS2", json, null);
             }
         });
     }
@@ -92,7 +118,7 @@ public class WebViewActivity extends WrapperPermissionActivity {
         XRWebView.with(webView).multi()
                 .jsInject("function show(){alert(\"hello world\");}" +
                                 "function changeButton(){document.getElementById(\"index-bn\").innerHTML = \"哈哈\";}",
-                        "changeButton();","show()")
+                        "changeButton();", "show()")
                 .build().loadUrl("https://m.baidu.com/", new BaseWebViewListener() {
             @Override
             public void onLoadError(int errorCode, String description) {

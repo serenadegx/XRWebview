@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.webkit.ValueCallback;
@@ -108,9 +110,18 @@ public class XRWebView {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static void androidCallJs(String functionName, ValueCallback valueCallback) {
         if (!TextUtils.isEmpty(functionName) && mWebView != null) {
             String jsMethod = "javascript:" + functionName + "()";
+            mWebView.evaluateJavascript(jsMethod, valueCallback);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static void androidCallJs(String functionName, String params, ValueCallback valueCallback) {
+        if (!TextUtils.isEmpty(functionName) && mWebView != null) {
+            String jsMethod = "javascript:" + functionName + "('" + params + "')";
             mWebView.evaluateJavascript(jsMethod, valueCallback);
         }
     }
