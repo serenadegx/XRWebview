@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -163,7 +162,6 @@ public class WebViewActivity extends WrapperPermissionActivity {
             public void onProgress(int progress) {
                 if (progress == 100) {
                     pb.setVisibility(View.GONE);
-                } else {
                     pb.setVisibility(View.VISIBLE);
                     pb.setProgress(progress);
                 }

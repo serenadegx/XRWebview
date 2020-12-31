@@ -75,7 +75,12 @@ public class LoadUrl {
 
         webSettings.setJavaScriptEnabled(true);//启用JS
 
-        webSettings.setDomStorageEnabled(true);//解决H5启用LocalStorage问题
+        //解决H5启用LocalStorage问题
+        webSettings.setDomStorageEnabled(true);
+        //允许js访问本地文件
+        webSettings.setAllowFileAccess(true);
+        webSettings.setAllowFileAccessFromFileURLs(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
     }
 
     private void initWebChromeClient(BaseWebViewListener webViewListener) {
