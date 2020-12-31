@@ -127,26 +127,22 @@ public class XRWebView {
     }
 
     public static void onActivityResultAboveL(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FILE_CHOOSER_REQUEST_CODE && data != null) {
-            Uri[] results = null;
-            if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    String dataString = data.getDataString();
-                    ClipData clipData = data.getClipData();
-                    if (clipData != null) {
-                        results = new Uri[clipData.getItemCount()];
-                        for (int i = 0; i < clipData.getItemCount(); i++) {
-                            ClipData.Item item = clipData.getItemAt(i);
-                            results[i] = item.getUri();
-                        }
-                    }
-                    if (dataString != null)
-                        results = new Uri[]{Uri.parse(dataString)};
+        Uri[] results = null;
+        if (data != null) {
+            String dataString = data.getDataString();
+            ClipData clipData = data.getClipData();
+            if (clipData != null) {
+                results = new Uri[clipData.getItemCount()];
+                for (int i = 0; i < clipData.getItemCount(); i++) {
+                    ClipData.Item item = clipData.getItemAt(i);
+                    results[i] = item.getUri();
                 }
             }
-            if (uploadMessageAboveL != null)
-                uploadMessageAboveL.onReceiveValue(results);
-            uploadMessageAboveL = null;
+            if (dataString != null)
+                results = new Uri[]{Uri.parse(dataString)};
         }
+        if (uploadMessageAboveL != null)
+            uploadMessageAboveL.onReceiveValue(results);
+        uploadMessageAboveL = null;
     }
 }
