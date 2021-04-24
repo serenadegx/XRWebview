@@ -42,7 +42,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 
 	dependencies {
-	        implementation 'com.github.serenadegx:XRWebview:1.1.3'
+	        implementation 'com.github.serenadegx:XRWebview:1.2.3'
 	}
 
 
@@ -78,77 +78,7 @@ Add the dependency
                 }
             }
         });
-        
-                
- 各功能使用：
  
-    XRWebView.with(webView).multi()
-    		.addDownLoadListener(new DownloadListener())//下载
-                .jsCallAndroid(new AndroidCallJS(this), "test1")//jsCallAndroid
-		.openFile(new FileChooserWebViewListener())//上传文件（图片、视频、音频、其他）
-		.syncCookie(this, url, cookies)//同步cookie
-                .build()
-                .loadUrlInAsset("javascript1.html", new BaseWebViewListener() {
-                    @Override
-                    public void onLoadError(int errorCode, String description) {
-
-                    }
-
-                    @Override
-                    public void onGetTitle(String title) {
-                        setTitle(title);
-                    }
-
-                    @Override
-                    public void onProgress(int progress) {
-                        if (progress == 100) {
-                            pb.setVisibility(View.GONE);
-                        } else {
-                            pb.setVisibility(View.VISIBLE);
-                            pb.setProgress(progress);
-                        }
-                    }
-                });
- 	//androidCallJs
- 	XRWebView.androidCallJs("callJS", new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String value) {
-                        Snackbar.make(v, value, Snackbar.LENGTH_SHORT)
-                                .setAction("关闭", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                    }
-                                })
-                                .show();
-                    }
-                });
-            }
-	    //js函数注入
-	    XRWebView.with(webView).multi()
-                .jsInject("function show(){alert(\"hello world\");}" +
-                                "function changeButton(){document.getElementById(\"index-bn\").innerHTML = \"哈哈\";}",
-                        "changeButton();","show()")
-                .build().loadUrl("https://m.baidu.com/", new BaseWebViewListener() {
-            @Override
-            public void onLoadError(int errorCode, String description) {
-
-            }
-
-            @Override
-            public void onGetTitle(String title) {
-
-            }
-
-            @Override
-            public void onProgress(int progress) {
-                if (progress == 100) {
-                    pb.setVisibility(View.GONE);
-                } else {
-                    pb.setVisibility(View.VISIBLE);
-                    pb.setProgress(progress);
-                }
-            }
-        });
 
  回退及回收：
  
@@ -162,8 +92,6 @@ Add the dependency
             }
         });
  
-
-感谢同事文静，谦谦答疑，也感谢以下博客：
 
 https://www.jianshu.com/p/b9164500d3fb
 
