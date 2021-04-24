@@ -110,23 +110,90 @@ public class XRWebView {
         }
     }
 
+    /**
+     * 原生调js
+     *
+     * @param functionName js function name
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static void androidCallJs(String functionName, ValueCallback valueCallback) {
+    public static void androidCallJs(String functionName) {
         if (!TextUtils.isEmpty(functionName) && mWebView != null) {
             String jsMethod = "javascript:" + functionName + "()";
-            mWebView.evaluateJavascript(jsMethod, valueCallback);
+            mWebView.evaluateJavascript(jsMethod, null);
         }
     }
 
+    /**
+     * 原生调js
+     *
+     * @param functionName   js function name
+     * @param resultCallback js function return value
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static void androidCallJs(String functionName, String params, ValueCallback valueCallback) {
+    public static void androidCallJs(String functionName, ValueCallback<String> resultCallback) {
         if (!TextUtils.isEmpty(functionName) && mWebView != null) {
-            String jsMethod = "javascript:" + functionName + "('" + params + "')";
-            mWebView.evaluateJavascript(jsMethod, valueCallback);
+            String jsMethod = "javascript:" + functionName + "()";
+            mWebView.evaluateJavascript(jsMethod, resultCallback);
         }
     }
 
-    public static void onActivityResultAboveL(int requestCode, int resultCode, Intent data) {
+    /**
+     * 原生调js
+     *
+     * @param functionName js function name
+     * @param params       js function params
+     */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static void androidCallJs(String functionName, Object... params) {
+        if (!TextUtils.isEmpty(functionName) && mWebView != null && params != null && params.length > 0) {
+            StringBuilder sb = new StringBuilder("javascript:" + functionName + "('");
+            for (int i = 0; i < params.length; i++) {
+                if (i < params.length - 1) {
+                    sb.append(params[i] + "','");
+                }
+                if (i == params.length - 1) {
+                    sb.append(params[i] + "')");
+                }
+            }
+            mWebView.evaluateJavascript(sb.toString(), null);
+        }
+    }
+
+    /**
+     * 原生调js
+     *
+     * @param functionName   js function name
+     * @param resultCallback js function return value
+     * @param params         js function params
+     */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static void androidCallJs(String functionName, ValueCallback<String> resultCallback, Object... params) {
+        if (!TextUtils.isEmpty(functionName) && mWebView != null && params != null && params.length > 0) {
+            StringBuilder sb = new StringBuilder("javascript:" + functionName + "('");
+            for (int i = 0; i < params.length; i++) {
+                if (i < params.length - 1) {
+                    sb.append(params[i] + "','");
+                }
+                if (i == params.length - 1) {
+                    sb.append(params[i] + "')");
+                }
+            }
+            mWebView.evaluateJavascript(sb.toString(), resultCallback);
+        }
+    }
+
+    /**
+     * @param results 文件uri
+     */
+    public static void handleOnActivityResult(Uri... results) {
+        if (uploadMessageAboveL != null)
+            uploadMessageAboveL.onReceiveValue(results);
+    }
+
+    /**
+     * @param data 意图
+     */
+    public static void handleOnActivityResult(Intent data) {
         Uri[] results = null;
         if (data != null) {
             String dataString = data.getDataString();
@@ -143,6 +210,5 @@ public class XRWebView {
         }
         if (uploadMessageAboveL != null)
             uploadMessageAboveL.onReceiveValue(results);
-        uploadMessageAboveL = null;
     }
 }

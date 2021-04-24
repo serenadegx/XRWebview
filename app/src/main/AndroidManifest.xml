@@ -21,6 +21,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".WebViewActivity" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.serenadegx.wrapperwebview.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">`
+            <!--指定Uri的共享路径-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
     <!--对恶意网站的检测来保护web浏览的安全性-->
     <meta-data
