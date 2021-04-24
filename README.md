@@ -45,11 +45,6 @@ Add the dependency
 	        implementation 'com.github.serenadegx:XRWebview:1.2.3'
 	}
 
-
-	}
-
-
-
 普通网页加载：
 
     XRWebView.with(webView)
